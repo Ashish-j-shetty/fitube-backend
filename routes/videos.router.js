@@ -3,6 +3,6 @@ const { getVideos, addVideos } = require("../controllers/video.controller");
 
 const router = express.Router();
 
-router.route("/").get(getVideos).post(addVideos);
+router.route("/").get(getVideos);
 
 module.exports = router;

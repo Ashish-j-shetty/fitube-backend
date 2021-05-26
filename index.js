@@ -12,6 +12,8 @@ const { routeNotFound } = require("./middlewares/route-not-fount-middelware");
 const { errorHandler } = require("./middlewares/error-handler-middelware");
 
 const videoRouter = require("./routes/videos.router");
+const likedVideosRouter = require("./routes/likedVideos.router");
+const userRouter = require("./routes/user.router");
 const { populateVideoColletion } = require("./models/video.model");
 
 /**
@@ -31,7 +33,9 @@ app.get("/", (req, res) => {
   res.json({ mssage: "welcome to fittube api explorer" });
 });
 
+app.use("/user", userRouter);
 app.use("/video", videoRouter);
+app.use("/liked-video", likedVideosRouter);
 
 /**
  * Route not found middleware do not move

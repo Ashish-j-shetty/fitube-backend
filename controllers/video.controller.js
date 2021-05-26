@@ -1,11 +1,17 @@
+const { Video } = require("../models/video.model");
+
 const getVideos = async (req, res) => {
-  res.send("welcome to video router");
+  try {
+    const videos = await Video.find({});
+
+    res.status(200).json({ succes: true, videos });
+  } catch (error) {
+    res.status(500).json({
+      succes: false,
+      message: "something went wrong",
+      error: error.message,
+    });
+  }
 };
 
-const addVideos = async (req, res) => {
-  const data = req.body;
-
-  res.send({ data });
-};
-
-module.exports = { getVideos, addVideos };
+module.exports = { getVideos };
