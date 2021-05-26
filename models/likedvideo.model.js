@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const LikedVideoSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   videos: [
     {
       _id: { type: mongoose.Schema.Types.ObjectId, ref: "Video" },
