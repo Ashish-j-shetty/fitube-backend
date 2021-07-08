@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const secret = process.env.JWT_SECRET;
 
 const { User } = require("../models/user.model");
 
@@ -12,17 +13,22 @@ const userLogin = async (req, res) => {
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        res
+        return res
           .status(401)
           .json({ success: false, message: "Incorect username or password" });
       }
       const token = jwt.sign(
-        { username: user.username, id: user._id },
+        { username: user.username, userId: user._id },
         process.env.JWT_SECRET,
         { expiresIn: "30d" }
       );
 
-      res.status(200).json({ success: true, token });
+      res.status(200).json({
+        success: true,
+        user: { name: user.name, email: user.email, userId: user._id },
+        token,
+        message: "Login successfull",
+      });
     } else {
       res
         .status(401)
@@ -39,12 +45,43 @@ const userLogin = async (req, res) => {
 
 const userSignup = async (req, res) => {
   try {
-    const user = req.body;
+    const { name, email, password } = req.body;
+
+    const user = await User.findOne({ email: email });
+
+    if (user) {
+      return res.status(409).json({
+        success: false,
+        message: "This email id is already registered with us",
+      });
+    }
+
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
-    const newUser = new User(user);
-    await newUser.save();
-    res.status(201).json({ success: true, data: "User created successfully." });
+
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newUser = new User({
+      name: name,
+      email: email,
+      password: hashedPassword,
+    });
+
+    const savedUser = await newUser.save();
+
+    const token = jwt.sign({ userId: savedUser._id }, secret, {
+      expiresIn: "30d",
+    });
+
+    res.json({
+      success: true,
+      user: {
+        name: savedUser.name,
+        email: savedUser.email,
+        userId: savedUser._id,
+      },
+      token,
+      message: "Signed up successfully",
+    });
   } catch (error) {
     res.status(500).json({
       success: false,

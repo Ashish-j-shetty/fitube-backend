@@ -2,12 +2,6 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-      index: true,
-      required: "username is a should be provided",
-      unique: true,
-    },
     password: {
       type: String,
       required: "Password should be provided",
