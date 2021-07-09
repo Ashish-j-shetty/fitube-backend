@@ -9,6 +9,7 @@ const PlaylistSchema = new mongoose.Schema(
     name: {
       type: String,
       required: "Please provide the playlist name ",
+      unique: true,
     },
     videos: [
       {

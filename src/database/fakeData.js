@@ -23,6 +23,7 @@ async function getData() {
       subscribers: faker.datatype.number(),
       date: faker.date.past(),
     },
+
     {
       id: "_8kV4FHSdNA",
       title: "What yoga does to your body and brain - Krishna Sudhir",
@@ -33,26 +34,7 @@ async function getData() {
       subscribers: faker.datatype.number(),
       date: faker.date.past(),
     },
-    {
-      id: "_8kV4FHSdNA",
-      title: "What yoga does to your body and brain - Krishna Sudhir",
-      description:
-        "Explore the ancient tradition of yoga, and discover how its blend of physical and mental exercise impacts your health.",
-      views: faker.datatype.number(),
-      autor: "TED-Ed",
-      subscribers: faker.datatype.number(),
-      date: faker.date.past(),
-    },
-    {
-      id: "ECxYJcnvyMw",
-      title: "7-Minute Workout ",
-      description:
-        "Based on the article published in American College of Sports Medicine. It features 12 exercises deploying only body weight, a wall and a chair.",
-      views: faker.datatype.number(),
-      autor: "Lifehack",
-      subscribers: faker.datatype.number(),
-      date: faker.date.past(),
-    },
+
     {
       id: "ECxYJcnvyMw",
       title: "7-Minute Workout ",
@@ -73,16 +55,7 @@ async function getData() {
       subscribers: faker.datatype.number(),
       date: faker.date.past(),
     },
-    {
-      id: "rLsimrBoYXc",
-      title: "The surprising reason our muscles get tired - Christian Moro",
-      description:
-        "Why do our muscles get tired and sore after exercise? Explore how our muscles function, and how you can exercise longer without experiencing muscle fatigue.",
-      views: faker.datatype.number(),
-      autor: "TED-Ed",
-      subscribers: faker.datatype.number(),
-      date: faker.date.past(),
-    },
+
     {
       id: "-SPRPkLoKp8",
       title: "How do your hormones work? - Emma Bryce",
@@ -104,16 +77,7 @@ async function getData() {
       subscribers: faker.datatype.number(),
       date: faker.date.past(),
     },
-    {
-      id: "AaOBZNUIBWU",
-      title: "Full Body Workout at Home Without Equipment",
-      description:
-        "Full body workout without equipment to lose weight at home. Body weight exercises to burn fat and get in shape fast. Workout without weights suitable for men and women to tone and define your body.",
-      views: faker.datatype.number(),
-      autor: "Lumowell",
-      subscribers: faker.datatype.number(),
-      date: faker.date.past(),
-    },
+
     {
       id: "XgI_p8bKg78",
       title: "Complete 20 Min ABS Workout | Follow Along",

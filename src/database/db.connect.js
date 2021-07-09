@@ -6,6 +6,7 @@ async function initializeDBConnection() {
     await mongoose.connect(DB_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
+      autoIndex: true,
       useCreateIndex: true,
     });
 

@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 app.use("/video", videoRouter);
 
-app.use("/playlists", playlistRouter);
+app.use("/playlists", verifyRequest, playlistRouter);
 
 /**
  * Route not found middleware do not move
