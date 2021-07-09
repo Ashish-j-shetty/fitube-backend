@@ -2,8 +2,8 @@ const express = require("express");
 const {
   createPlaylist,
   getUserPlaylist,
-  addVideoToPlaylist,
-  removeVideoFromPlaylist,
+  updatePlaylist,
+  deletePlaylist,
 } = require("../controllers/playlist.controller");
 const router = express.Router();
 
@@ -11,9 +11,6 @@ router.route("/").post(createPlaylist);
 
 router.route("/:userId").get(getUserPlaylist);
 
-router
-  .route("/:playlist")
-  .post(addVideoToPlaylist)
-  .delete(removeVideoFromPlaylist);
+router.route("/:playlistId").post(updatePlaylist).delete(deletePlaylist);
 
 module.exports = router;
