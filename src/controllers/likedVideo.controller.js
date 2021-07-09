@@ -19,8 +19,6 @@ async function postLikedVideos(req, res) {
 
     const { videoId } = req.body;
 
-    console.log(videoId);
-
     let userLikedVideos = await LikedVideo.findOne({ userId: _id });
 
     console.log(userLikedVideos);
