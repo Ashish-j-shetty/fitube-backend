@@ -14,7 +14,7 @@ const {
 const { errorHandler } = require("./src/middlewares/error-handler-middelware");
 
 const videoRouter = require("./src/routes/videos.router");
-const likedVideosRouter = require("./src/routes/likedVideos.router");
+
 const userRouter = require("./src/routes/user.router");
 const playlistRouter = require("./src/routes/playlist.router");
 const { populateVideoColletion } = require("./src/models/video.model");
@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRouter);
 app.use("/video", videoRouter);
-app.use("/liked-video", verifyRequest, likedVideosRouter);
+
 app.use("/playlists", playlistRouter);
 
 /**
