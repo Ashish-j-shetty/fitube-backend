@@ -1,8 +1,21 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { Playlist } = require("../models/playlist.model");
 const secret = process.env.JWT_SECRET;
 
 const { User } = require("../models/user.model");
+
+const defaultPlaylist = [
+  {
+    name: "Liked Videos",
+  },
+  {
+    name: "Saved Videos",
+  },
+  {
+    name: "Watch Later Videos",
+  },
+];
 
 const userLogin = async (req, res) => {
   try {
@@ -67,6 +80,15 @@ const userSignup = async (req, res) => {
     });
 
     const savedUser = await newUser.save();
+
+    defaultPlaylist.forEach(async (item) => {
+      const newplaylist = new Playlist({
+        owner: savedUser._id,
+        name: item.name,
+        videos: [],
+      });
+      await newplaylist.save();
+    });
 
     const token = jwt.sign({ userId: savedUser._id }, secret, {
       expiresIn: "30d",
