@@ -74,9 +74,30 @@ const deletePlaylist = async (req, res) => {
   }
 };
 
+const updatePlaylistInfo = async (req, res) => {
+  try {
+    const { playlistId } = req.params;
+    const { newName } = req.body;
+
+    const playlist = await Playlist.findOneAndUpdate(
+      {
+        _id: playlistId,
+      },
+      {
+        name: newName,
+      }
+    );
+
+    res.json({ success: true, playlist, message: "Playlist name updated" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   createPlaylist,
   getUserPlaylist,
   updatePlaylist,
   deletePlaylist,
+  updatePlaylistInfo,
 };
