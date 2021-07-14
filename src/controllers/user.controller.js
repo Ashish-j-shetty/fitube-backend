@@ -126,7 +126,7 @@ const updateAccount = async (req, res) => {
 
       const hashedPassword = await bcrypt.hash(newDetails.password, salt);
 
-      const newUser = await User.findOneAndUpdate(
+      await User.findOneAndUpdate(
         { _id: id },
         {
           name: newDetails.name,
@@ -136,9 +136,15 @@ const updateAccount = async (req, res) => {
         }
       );
 
+      const updatedUser = {
+        name: newDetails.name,
+        email: newDetails.email,
+        userId: newDetails.id,
+      };
+
       res.json({
         success: true,
-        user: newUser,
+        user: updatedUser,
         message: "User updated successfully",
       });
     }
