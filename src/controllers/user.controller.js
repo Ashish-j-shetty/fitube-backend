@@ -113,4 +113,34 @@ const userSignup = async (req, res) => {
   }
 };
 
-module.exports = { userLogin, userSignup };
+const updateAccount = async (req, res) => {
+  try {
+    const newDetails = req.body;
+
+    const { id } = newDetails;
+
+    const user = await User.findById({ _id: id });
+
+    if (user) {
+      const salt = await bcrypt.genSalt(10);
+
+      const hashedPassword = await bcrypt.hash(newDetails.password, salt);
+
+      const newUser = await User.findOneAndUpdate(
+        { _id: id },
+        {
+          name: newDetails.name,
+          email: newDetails.email,
+          password: hashedPassword,
+          updatedAt: Date(),
+        }
+      );
+
+      res.json({ success: true, message: newUser });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+module.exports = { userLogin, userSignup, updateAccount };
